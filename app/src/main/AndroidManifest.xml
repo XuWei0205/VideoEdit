@@ -19,6 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.SelectActivity" />
+        <activity android:name=".activities.VideoEditActivity" />
+        <activity android:name=".activities.PreviewActivity" />
     </application>
 
 </manifest>

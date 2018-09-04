@@ -2,4 +2,8 @@
     <string name="app_name">VideoEdit</string>
     <string name="text_button_select">选择视频</string>
     <string name="text_my_video_album">我的视频</string>
+    <string name="txt_cancel">取消</string>
+    <string name="txt_complete">完成</string>
+    <string name="txt_save">保存</string>
+    <string name="txt_submit">提交</string>
 </resources>

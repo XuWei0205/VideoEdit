@@ -1,13 +1,14 @@
 package hanyu.com.videoedit.activities
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.support.v7.widget.GridLayoutManager
 import android.widget.Toast
 import hanyu.com.videoedit.R
-import hanyu.com.videoedit.activities.Beans.VideoBean
+import hanyu.com.videoedit.Beans.VideoBean
 import hanyu.com.videoedit.activities.adpters.AlbumAdapter
 import hanyu.com.videoedit.activities.providers.VideoProvider
 import kotlinx.android.synthetic.main.activity_select.*
@@ -38,7 +39,10 @@ class SelectActivity : BaseActivity(), AlbumAdapter.IItemClick {
 
 
     override fun itemClicked(path: String) {
-        Toast.makeText(this, path, Toast.LENGTH_LONG).show()
+        val intent: Intent = Intent(this, VideoEditActivity::class.java)
+        intent.putExtra("path", path)
+        startActivity(intent)
+        //Toast.makeText(this, path, Toast.LENGTH_LONG).show()
     }
 
 
