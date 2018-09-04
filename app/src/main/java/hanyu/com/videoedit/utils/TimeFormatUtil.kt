@@ -13,5 +13,11 @@ class TimeFormatUtil {
             simpleDateFormat.timeZone = TimeZone.getTimeZone("GMT+0:00")
             return simpleDateFormat.format(duration)
         }
+
+
+        fun timeYMDFormat(time: Long): String {
+            val simpleDateFormat = SimpleDateFormat("yyyy_mm_dd", Locale.CHINA)
+            return simpleDateFormat.format(time)
+        }
     }
 }

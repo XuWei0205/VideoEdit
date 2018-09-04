@@ -1,10 +1,17 @@
 package hanyu.com.videoedit.activities
 
+import VideoHandle.EpEditor
+import VideoHandle.EpVideo
+import VideoHandle.OnEditorListener
+import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import hanyu.com.videoedit.R
+import hanyu.com.videoedit.utils.TimeFormatUtil
 import kotlinx.android.synthetic.main.activity_edit.*
 
 
@@ -14,7 +21,8 @@ import kotlinx.android.synthetic.main.activity_edit.*
 
 class VideoEditActivity : BaseActivity() {
     private var path: String = ""
-
+    private var startEditPoint: Float = 0.0f
+    private var endEditpoint: Float = 0.0f
 
     override fun getLayout(): Int {
         return R.layout.activity_edit
@@ -47,6 +55,30 @@ class VideoEditActivity : BaseActivity() {
         val decorView = window.decorView
         val option = View.SYSTEM_UI_FLAG_FULLSCREEN
         decorView.systemUiVisibility = option
+    }
+
+
+    private fun editCutVideo() {
+        val epVideo = EpVideo(path)
+        epVideo.clip(startEditPoint, endEditpoint)
+        val outPath = Environment.getExternalStorageDirectory().path + "/videoEdit/ " + TimeFormatUtil.timeYMDFormat(System.currentTimeMillis()) + ".mp4"
+        EpEditor.exec(epVideo, EpEditor.OutputOption(outPath), object : OnEditorListener {
+            override fun onSuccess() {
+                val intent = Intent(this@VideoEditActivity, PreviewActivity::class.java)
+                intent.putExtra("previewPath", outPath)
+                startActivity(intent)
+                Log.i("outPath", "----->$outPath")
+            }
+
+            override fun onFailure() {
+                Toast.makeText(this@VideoEditActivity, "编辑失败", Toast.LENGTH_SHORT).show()
+
+            }
+
+            override fun onProgress(v: Float) {
+
+            }
+        })
     }
 
     override fun onDestroy() {
