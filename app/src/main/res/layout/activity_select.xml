@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="hanyu.com.videoedit.activities.SelectActivity">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#000000">
-
-        <ImageView
-            android:id="@+id/tv_select_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@mipmap/ic_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:text="@string/text_my_video_album"
             android:textColor="#ffffff"
             android:textSize="20sp"
@@ -28,7 +21,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.constraint.Guideline
+    <ImageView
+        android:id="@+id/imgv_select_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@mipmap/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.Guideline
             android:id="@+id/line1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -36,6 +39,7 @@
             app:layout_constraintGuide_begin="45dp" />
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_video_album"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="#e0e0e0"
@@ -44,4 +48,3 @@
 
         </android.support.v7.widget.RecyclerView>
     </android.support.constraint.ConstraintLayout>
-</layout>

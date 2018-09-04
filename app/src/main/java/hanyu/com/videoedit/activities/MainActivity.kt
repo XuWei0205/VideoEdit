@@ -1,10 +1,9 @@
 package hanyu.com.videoedit.activities
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import butterknife.BindView
 import hanyu.com.videoedit.R
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : BaseActivity() {
@@ -12,13 +11,12 @@ class MainActivity : BaseActivity() {
         return R.layout.activity_main
     }
 
-    @BindView(R.id.bt_select_video)
-    var button: Button? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        button?.setOnClickListener({
-
+        bt_select_video.setOnClickListener({
+            startActivity(Intent(this, SelectActivity::class.java))
         })
 
     }
