@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_edit.*
 class VideoEditActivity : BaseActivity() {
     private var path: String = ""
     private var startEditPoint: Float = 0.0f
-    private var endEditpoint: Float = 0.0f
+    private var endEditPoint: Float = 0.0f
 
     override fun getLayout(): Int {
         return R.layout.activity_edit
@@ -60,7 +60,7 @@ class VideoEditActivity : BaseActivity() {
 
     private fun editCutVideo() {
         val epVideo = EpVideo(path)
-        epVideo.clip(startEditPoint, endEditpoint)
+        epVideo.clip(startEditPoint, endEditPoint)
         val outPath = Environment.getExternalStorageDirectory().path + "/videoEdit/ " + TimeFormatUtil.timeYMDFormat(System.currentTimeMillis()) + ".mp4"
         EpEditor.exec(epVideo, EpEditor.OutputOption(outPath), object : OnEditorListener {
             override fun onSuccess() {

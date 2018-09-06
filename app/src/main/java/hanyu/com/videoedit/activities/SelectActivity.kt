@@ -7,10 +7,10 @@ import android.os.Handler
 import android.os.Message
 import android.support.v7.widget.GridLayoutManager
 import android.widget.Toast
-import hanyu.com.videoedit.R
 import hanyu.com.videoedit.Beans.VideoBean
-import hanyu.com.videoedit.activities.adpters.AlbumAdapter
-import hanyu.com.videoedit.activities.providers.VideoProvider
+import hanyu.com.videoedit.R
+import hanyu.com.videoedit.adpters.AlbumAdapter
+import hanyu.com.videoedit.providers.VideoProvider
 import kotlinx.android.synthetic.main.activity_select.*
 import java.lang.ref.WeakReference
 
@@ -84,7 +84,7 @@ class SelectActivity : BaseActivity(), AlbumAdapter.IItemClick {
             when (msg?.what) {
                 SUCCESS -> {
                     @Suppress("UNCHECKED_CAST")
-                    var tepList: ArrayList<VideoBean> = msg.obj as? ArrayList<VideoBean> ?: return
+                    val tepList: ArrayList<VideoBean> = msg.obj as? ArrayList<VideoBean> ?: return
                     theActivity?.mDataList?.addAll(tepList)
                     theActivity?.myAdapter?.notifyDataSetChanged()
                 }
