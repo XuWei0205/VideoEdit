@@ -7,9 +7,10 @@ import android.os.Handler
 import android.os.Message
 import android.support.v7.widget.GridLayoutManager
 import android.widget.Toast
-import hanyu.com.videoedit.Beans.VideoBean
 import hanyu.com.videoedit.R
 import hanyu.com.videoedit.adpters.AlbumAdapter
+import hanyu.com.videoedit.adpters.ThumbnailAdapter
+import hanyu.com.videoedit.beans.VideoBean
 import hanyu.com.videoedit.providers.VideoProvider
 import kotlinx.android.synthetic.main.activity_select.*
 import java.lang.ref.WeakReference
@@ -19,8 +20,7 @@ import java.lang.ref.WeakReference
  */
 class SelectActivity : BaseActivity(), AlbumAdapter.IItemClick {
 
-
-    private var myAdapter: AlbumAdapter? = null
+    private var mAlbumAdapter: AlbumAdapter? = null
     private var mDataList: ArrayList<VideoBean>? = arrayListOf()
     private var handler: InnerHandler = InnerHandler(this)
 
@@ -48,8 +48,8 @@ class SelectActivity : BaseActivity(), AlbumAdapter.IItemClick {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        myAdapter = AlbumAdapter(this, mDataList!!, this)
-        rv_video_album.adapter = myAdapter
+        mAlbumAdapter = AlbumAdapter(this, mDataList!!, this)
+        rv_video_album.adapter = mAlbumAdapter
         rv_video_album?.layoutManager = GridLayoutManager(this, 4)
         getData()
         imgv_select_back.setOnClickListener({
@@ -86,7 +86,7 @@ class SelectActivity : BaseActivity(), AlbumAdapter.IItemClick {
                     @Suppress("UNCHECKED_CAST")
                     val tepList: ArrayList<VideoBean> = msg.obj as? ArrayList<VideoBean> ?: return
                     theActivity?.mDataList?.addAll(tepList)
-                    theActivity?.myAdapter?.notifyDataSetChanged()
+                    theActivity?.mAlbumAdapter?.notifyDataSetChanged()
                 }
                 else -> Toast.makeText(theActivity, "获取数据失败", Toast.LENGTH_LONG).show()
             }

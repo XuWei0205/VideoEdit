@@ -4,7 +4,7 @@ import android.content.ContentResolver
 import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
-import hanyu.com.videoedit.Beans.VideoBean
+import hanyu.com.videoedit.beans.VideoBean
 
 /**
  * Created by HanYu on 2018/9/3.

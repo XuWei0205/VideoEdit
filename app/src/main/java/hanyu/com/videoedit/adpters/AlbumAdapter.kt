@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import hanyu.com.videoedit.Beans.VideoBean
+import hanyu.com.videoedit.beans.VideoBean
 import hanyu.com.videoedit.R
 import hanyu.com.videoedit.utils.TimeFormatUtil
 import java.io.File

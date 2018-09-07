@@ -1,4 +1,4 @@
-package hanyu.com.videoedit.Beans
+package hanyu.com.videoedit.beans
 
 /**
  * Created by HanYu on 2018/8/31.
