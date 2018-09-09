@@ -36,7 +36,7 @@ class EditBar : View {
     private var pointId: Int = INVALID_POINT_ID
     private var motionDownX: Float = 0f // down事件x坐标
     private var pressedBar: BarType = BarType.NULL
-    private var trackMotionEvent: Boolean = false
+    private var isTrackMotionEvent: Boolean = false
     private var trackListener: IRangeSeekBarChangeListener? = null//监听bar滑动状态
 
     enum class BarType {
@@ -46,7 +46,6 @@ class EditBar : View {
     companion object {
         const val INVALID_POINT_ID: Int = -1
     }
-
 
 
     constructor(maxTimeInterval: Double, minTimeInterval: Double, context: Context) : this(context) {
@@ -194,18 +193,66 @@ class EditBar : View {
                     return super.onTouchEvent(event)
                 }
                 isPressed = true
-                trackMotionEvent = true//开始追踪滑动事件
+                isTrackMotionEvent = true//开始追踪滑动事件
                 trackEvent(event)//追踪启动！
                 notifyParent()
                 if (trackListener != null) {
                     // todo trackListener!!.onRangeSeekBarValuesChanged()
                 }
-
-
+            }
+            MotionEvent.ACTION_MOVE -> {
+                if (isTrackMotionEvent) {
+                    trackEvent(event)
+                } else {
+                    pointerIndex = event.findPointerIndex(pointId)
+                    val moveToX: Float = event.getX(pointerIndex)
+                    if (Math.abs(moveToX - motionDownX) > minTouchScale) {
+                        isPressed = true
+                        invalidate()
+                        isTrackMotionEvent = true
+                        trackEvent(event)
+                        notifyParent()
+                    }
+                    if (trackListener != null) {
+                        // todo trackListener.onRangeSeekBarValuesChanged()
+                    }
+                }
+            }
+            MotionEvent.ACTION_UP -> {
+                if (isTrackMotionEvent) {
+                    trackEvent(event)
+                    isTrackMotionEvent = false
+                    isPressed = false
+                } else {
+                    isTrackMotionEvent = true//为什么要确保处于跟踪状态？
+                    trackEvent(event)
+                    isTrackMotionEvent = false
+                }
+                invalidate()
+                if (trackListener != null) {
+                    //todo  trackListener.onRangeSeekBarValuesChanged()
+                }
+                pressedBar = BarType.NULL//拖动完成设为默认
+            }
+            MotionEvent.ACTION_POINTER_DOWN -> {
+                val index = event.pointerCount - 1
+                motionDownX = event.getX(index)
+                pointId = event.getPointerId(index)
+                invalidate()
+            }
+            MotionEvent.ACTION_POINTER_UP -> {
+                dealSecondPointAction()
+                invalidate()
+            }
+            MotionEvent.ACTION_CANCEL->{
+                if (isTrackMotionEvent){
+                    isTrackMotionEvent = false
+                    isPressed = false
+                }
+                invalidate()
             }
         }
-        // return super.onTouchEvent(event)
-
+        return true
 
     }
 
@@ -255,7 +302,10 @@ class EditBar : View {
         this.trackListener = trackListener
     }
 
+    private fun dealSecondPointAction() {
+//todo 处理多个Pointer事件
 
+    }
 
 }
 
